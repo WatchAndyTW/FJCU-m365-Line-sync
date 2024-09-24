@@ -1,28 +1,15 @@
+import { JSDOM } from 'jsdom';
+
 export default class HtmlUtil {
     public static trimHtml(html: string): string {
         let body: string = html.split("<body")[1].split(">").slice(1).join(">").split("</body>")[0];
         body = body.replace(/<br>/g, "\n");
         body = body.replace(/&amp;/g, "&");
-        for (let i = 0; i >= 0; i++) {
-            if (body.search("<div") == -1) break;
-            body = this.removeHtml(body, "div");
-        }
-        for (let i = 0; i >= 0; i++) {
-            if (body.search("<a") == -1) break;
-            body = this.removeHtml(body, "a");
-        }
-        for (let i = 0; i >= 0; i++) {
-            if (body.search("<p") == -1) break;
-            body = this.removeHtml(body, "p");
-        }
-        for (let i = 0; i >= 0; i++) {
-            if (body.search("<span") == -1) break;
-            body = this.removeHtml(body, "span");
-        }
+        const dom = new JSDOM(body);
+        body = dom.window.document.body.textContent as string;
         let fjcuLine: boolean = false;
         let nameLine: boolean = false;
         let noTextInTheFront: boolean = true;
-        let noTextInTheBack: boolean = false;
         let list = [];
         for (let line of body.split("\n")) {
             // School name line
@@ -31,15 +18,13 @@ export default class HtmlUtil {
                 continue;
             }
             // Student name line
-            if (!nameLine && line.trim().includes(" 您好！")) {
+            if (!nameLine && line.trim().includes(process.env.STUD_NAME as string)) {
                 nameLine = true;
+                body.replace(process.env.STUD_NAME as string, "同學們");
                 continue;
             }
             // Check if it's header line
             if (noTextInTheFront && this.isEmptyLine(line)) continue;
-            // Check if it's bottom line
-            if (line.trim() == "此為自動發送郵件，請勿直接回覆！") noTextInTheBack = true;
-            if (noTextInTheBack) continue;
             // Push string
             list.push(line.trim());
             noTextInTheFront = false;

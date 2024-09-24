@@ -12,6 +12,7 @@ const envList: Array<string> = [
     "DC_CHANNE",
     "IMAP_USER",
     "IMAP_PASS",
+    "STUD_NAME",
     "LINE_USER",
     "LINE_PASS",
     "LINE_MID"
