@@ -1,0 +1,36 @@
+{
+  "name": "fjcu-m365-line-sync",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm/transpile-only src/index.ts",
+    "start": "node build/index.js",
+    "watch": "nodemon --exec npm run dev --watch src --ext ts"
+  },
+  "dependencies": {
+    "@discordx/importer": "^1.3.1",
+    "@evex/linejs": "npm:@jsr/evex__linejs@^1.4.1",
+    "@types/imap": "^0.8.40",
+    "discord.js": "^14.15.3",
+    "discordx": "^11.12.1",
+    "dotenv": "^16.4.5",
+    "imap": "^0.8.19",
+    "mailparser": "^3.7.1"
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.4.4",
+    "@types/node": "^20.14.4",
+    "nodemon": "^3.1.3",
+    "prettier": "^3.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "5.4.5"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  }
+}

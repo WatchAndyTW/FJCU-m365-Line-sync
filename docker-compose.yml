@@ -1,0 +1,12 @@
+version: "3"
+services:
+  app:
+    build: .
+    command: node build/index.js
+    environment:
+      - IMAP_USER=${IMAP_USER}
+      - IMAP_PASS=${IMAP_PASS}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - LINE_USER=${LINE_USER}
+      - LINE_PASS=${LINE_PASS}
+      - LINE_MID=${LINE_MID}
