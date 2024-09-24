@@ -9,6 +9,7 @@ export let line: LineClient;
 
 const envList: Array<string> = [
     "BOT_TOKEN",
+    "DC_CHANNE",
     "IMAP_USER",
     "IMAP_PASS",
     "LINE_USER",

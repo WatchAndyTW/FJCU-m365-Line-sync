@@ -28,7 +28,7 @@ export default class DiscordClient {
     }
 
     public send(embed: EmbedBuilder): void {
-        let channel: Channel | undefined = this.client.channels.cache.get("1287814649110073426");
+        let channel: Channel | undefined = this.client.channels.cache.get(process.env.DC_CHANNE as string);
         if (channel == undefined) return;
         if (!channel.isTextBased()) return;
         let textChannel: TextChannel = channel as TextChannel;
