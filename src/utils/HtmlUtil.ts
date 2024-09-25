@@ -36,12 +36,6 @@ export default class HtmlUtil {
         list = list.slice(0, lastLine);
         return list.join("\n");
     }
-
-    private static removeHtml(body: string, name: string): string {
-        let split = body.split(`<${name}`);
-        let data = split[0] + body.split(`<${name}`).slice(1).join(`<${name}`).split(">").slice(1).join(">").split(`</${name}>`).join("");
-        return data;
-    }
     
     private static isEmptyLine(line: string) {
         return line.replace(/ /g, "") == "";

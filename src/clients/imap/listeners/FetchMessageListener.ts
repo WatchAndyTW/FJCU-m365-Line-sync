@@ -19,6 +19,7 @@ export default function FetchMessage(msg: ImapMessage, seqNo: number) {
             if (parsed.html as string != null) {
                 let trimmed: string = HtmlUtil.trimHtml(parsed.html as string);
                 let embed: EmbedBuilder = new EmbedBuilder();
+                embed.setTitle(parsed.subject as string);
                 embed.setDescription(`\`\`\`${trimmed}\`\`\``);
                 embed.setColor("Random");
                 discord.send(embed);

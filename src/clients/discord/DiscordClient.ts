@@ -32,7 +32,6 @@ export default class DiscordClient {
         if (channel == undefined) return;
         if (!channel.isTextBased()) return;
         let textChannel: TextChannel = channel as TextChannel;
-        embed.setTitle("已收到新通知");
         embed.setTimestamp();
         textChannel.send({ embeds: [embed] });
     }
