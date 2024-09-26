@@ -6,7 +6,7 @@ import MailListener from './listeners/MailListener.ts';
 
 export default class ImapClient {
     public client: Imap;
-    public enabled: boolean = false;
+    public static enabled: boolean = false;
 
     constructor() {
         this.client = new Imap({

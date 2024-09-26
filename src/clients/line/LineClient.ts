@@ -1,8 +1,8 @@
-import * as line from "@line/bot-sdk"
+import * as line from "@line/bot-sdk";
 
 export default class LineClient {
     public client: line.messagingApi.MessagingApiClient;
-    public enabled: boolean = false;
+    public static enabled: boolean = false;
 
     constructor() {
         this.client = new line.messagingApi.MessagingApiClient({

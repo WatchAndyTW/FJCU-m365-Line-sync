@@ -4,7 +4,7 @@ import ReadyListener from "./listeners/ReadyListener.ts";
 
 export default class DiscordClient {
     public client: Client;
-    public enabled: boolean = false;
+    public static enabled: boolean = false;
 
     constructor() {
         this.client = new Client({
