@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 
 const defaultConfig: ConfigContainer = {
+    ignore_courses: [],
     imap: {
         user: "",
         password: "",
@@ -54,9 +55,19 @@ export default class ConfigUtil {
         }
         return true;
     }
+
+    public static checkIfIgnoreCourse(title: string) {
+        for (let course of this.getConfig().ignore_courses) {
+            if (title.includes(`【${course}】`)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 interface ConfigContainer {
+    ignore_courses: Array<string>,
     imap: IMAP;
     discord: Discord;
     line: Line;
