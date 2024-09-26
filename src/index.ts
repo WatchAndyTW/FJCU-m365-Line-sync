@@ -2,7 +2,7 @@ import "dotenv/config";
 import ImapClient from "./clients/imap/ImapClient.ts";
 import DiscordClient from "./clients/discord/DiscordClient.ts";
 import LineClient from "./clients/line/LineClient.ts";
-import EnvUtil from "./utils/EnvUtil.ts";
+import ConfigUtil from "./utils/ConfigUtil.ts";
 
 export let imap: ImapClient;
 export let discord: DiscordClient;
@@ -10,7 +10,11 @@ export let line: LineClient;
 
 async function run() {
     // IMAP client
-    ImapClient.enabled = EnvUtil.checkIfNotNull(["IMAP_USER", "IMAP_PASS", "STUD_NAME"]);
+    ConfigUtil.loadConfig();
+    const config = ConfigUtil.getConfig();
+
+    // IMAP client
+    ImapClient.enabled = ConfigUtil.checkIfEmpty(config.imap);
     if (ImapClient.enabled) {
         imap = new ImapClient();
         imap.start();
@@ -19,14 +23,14 @@ async function run() {
     }
 
     // Discord client
-    DiscordClient.enabled = EnvUtil.checkIfNotNull(["DC_TOKEN", "DC_CHANNEL"]);
+    DiscordClient.enabled = ConfigUtil.checkIfEmpty(config.discord);
     if (DiscordClient.enabled) {
         discord = new DiscordClient();
         discord.start();
     }
 
-    // Line client (Temproary disabled due to Line API bugs)
-    LineClient.enabled = EnvUtil.checkIfNotNull(["LINE_TOKEN", "LINE_GROUP"]);
+    // Line client
+    LineClient.enabled = ConfigUtil.checkIfEmpty(config.line);
     if (LineClient.enabled) {
         line = new LineClient();
     }

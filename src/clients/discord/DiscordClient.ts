@@ -1,6 +1,7 @@
 import { Channel, EmbedBuilder, IntentsBitField, TextChannel } from "discord.js";
 import { Client } from "discordx";
 import ReadyListener from "./listeners/ReadyListener.ts";
+import ConfigUtil from "../../utils/ConfigUtil.ts";
 
 export default class DiscordClient {
     public client: Client;
@@ -21,7 +22,7 @@ export default class DiscordClient {
 
     public start(): void {
         this.registerListeners();
-        this.client.login(process.env.DC_TOKEN as string);
+        this.client.login(ConfigUtil.getConfig().discord.token);
     }
 
     private registerListeners(): void {
@@ -29,7 +30,7 @@ export default class DiscordClient {
     }
 
     public send(embed: EmbedBuilder): void {
-        let channel: Channel | undefined = this.client.channels.cache.get(process.env.DC_CHANNEL as string);
+        let channel: Channel | undefined = this.client.channels.cache.get(ConfigUtil.getConfig().discord.channel);
         if (channel == undefined) return;
         if (!channel.isTextBased()) return;
         let textChannel: TextChannel = channel as TextChannel;

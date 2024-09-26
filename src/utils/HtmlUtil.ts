@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import ConfigUtil from './ConfigUtil.ts';
 
 export default class HtmlUtil {
     public static trimHtml(html: string): string {
@@ -18,9 +19,10 @@ export default class HtmlUtil {
                 continue;
             }
             // Student name line
-            if (!nameLine && line.trim().includes(process.env.STUD_NAME as string)) {
+            const stud_name = ConfigUtil.getConfig().imap.student_name;
+            if (!nameLine && line.trim().includes(stud_name)) {
                 nameLine = true;
-                body.replace(process.env.STUD_NAME as string, "同學們");
+                body.replace(stud_name, "同學們");
                 continue;
             }
             // Check if it's header line
