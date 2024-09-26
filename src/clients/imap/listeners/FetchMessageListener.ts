@@ -2,8 +2,8 @@ import { ImapMessage } from "imap";
 import { ParsedMail, simpleParser } from 'mailparser';
 import { Readable } from 'stream';
 import HtmlUtil from '../../../utils/HtmlUtil.ts';
-import { EmbedBuilder } from 'discord.js';
-import { discord, imap } from '../../../index.ts';
+import { imap } from '../../../index.ts';
+import MsgUtil from "../../../utils/MsgUtil.ts";
 
 export default function FetchMessage(msg: ImapMessage, seqNo: number) {
     msg.on('body', (stream) => {
@@ -18,11 +18,7 @@ export default function FetchMessage(msg: ImapMessage, seqNo: number) {
             });
             if (parsed.html as string != null) {
                 let trimmed: string = HtmlUtil.trimHtml(parsed.html as string);
-                let embed: EmbedBuilder = new EmbedBuilder();
-                embed.setTitle(parsed.subject as string);
-                embed.setDescription(`\`\`\`${trimmed}\`\`\``);
-                embed.setColor("Random");
-                discord.send(embed);
+                MsgUtil.send(parsed.subject as string, trimmed);
             }
         });
     });

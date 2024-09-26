@@ -1,6 +1,6 @@
 [English](https://github.com/WatchAndyTW/TronClass-Social-sync/blob/main/README.md) | 中文
 
-# FJCU-m365-Social-sync
+# TronClass-Social-sync
 一個用於將 TronClass 郵件同步到社交媒體平台的機器人源代碼庫
 
 ## 使用方法

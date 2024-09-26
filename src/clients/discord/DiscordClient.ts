@@ -4,6 +4,7 @@ import ReadyListener from "./listeners/ReadyListener.ts";
 
 export default class DiscordClient {
     public client: Client;
+    public enabled: boolean = false;
 
     constructor() {
         this.client = new Client({
@@ -33,6 +34,7 @@ export default class DiscordClient {
         if (!channel.isTextBased()) return;
         let textChannel: TextChannel = channel as TextChannel;
         embed.setTimestamp();
+        embed.setColor("Random");
         textChannel.send({ embeds: [embed] });
     }
 }

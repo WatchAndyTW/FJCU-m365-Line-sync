@@ -10,8 +10,8 @@ export let line: LineClient;
 
 async function run() {
     // IMAP client
-    const imapEnable = EnvUtil.checkIfNotNull(["IMAP_USER", "IMAP_PASS", "STUD_NAME"]);
-    if (imapEnable) {
+    imap.enabled = EnvUtil.checkIfNotNull(["IMAP_USER", "IMAP_PASS", "STUD_NAME"]);
+    if (imap.enabled) {
         imap = new ImapClient();
         imap.start();
     } else {
@@ -19,19 +19,19 @@ async function run() {
     }
 
     // Discord client
-    const discordEnable = EnvUtil.checkIfNotNull(["DC_TOKEN", "DC_CHANNEL"]);
-    if (discordEnable) {
+    discord.enabled = EnvUtil.checkIfNotNull(["DC_TOKEN", "DC_CHANNEL"]);
+    if (discord.enabled) {
         discord = new DiscordClient();
         discord.start();
     }
 
     // Line client (Temproary disabled due to Line API bugs)
-    const lineEnable = EnvUtil.checkIfNotNull(["LINE_TOKEN", "LINE_GROUP"]);
-    if (lineEnable) {
+    line.enabled = EnvUtil.checkIfNotNull(["LINE_TOKEN", "LINE_GROUP"]);
+    if (line.enabled) {
         line = new LineClient();
     }
 
-    if (!discordEnable && !lineEnable) {
+    if (!discord.enabled && !line.enabled) {
         throw new Error("None of the social media platforms are enabled");
     }
 }
