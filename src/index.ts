@@ -19,18 +19,17 @@ async function run() {
     }
 
     // Discord client
-    const discordEnable = EnvUtil.checkIfNotNull(["BOT_TOKEN", "DC_CHANNE"]);
+    const discordEnable = EnvUtil.checkIfNotNull(["DC_TOKEN", "DC_CHANNEL"]);
     if (discordEnable) {
         discord = new DiscordClient();
         discord.start();
     }
 
     // Line client (Temproary disabled due to Line API bugs)
-    const lineEnable = EnvUtil.checkIfNotNull(["LINE_USER", "LINE_PASS", "LINE_MID"]);
-    /* if (lineEnable) {
+    const lineEnable = EnvUtil.checkIfNotNull(["LINE_TOKEN", "LINE_GROUP"]);
+    if (lineEnable) {
         line = new LineClient();
-        line.start();
-    } */
+    }
 
     if (!discordEnable && !lineEnable) {
         throw new Error("None of the social media platforms are enabled");

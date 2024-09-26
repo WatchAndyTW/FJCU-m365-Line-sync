@@ -11,8 +11,10 @@
    - IMAP_USER
    - IMAP_PASS
    - STUD_NAME
-   - BOT_TOKEN
-   - DC_CHANNE
+   - DC_TOKEN
+   - DC_CHANNEL
+   - LINE_TOKEN
+   - LINE_GROUP
 5. 運行指令 `npm run dev` 來啟動機器人
 6. 完成！
 

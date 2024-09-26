@@ -11,7 +11,9 @@ A repository containing the source code of the bot for syncing TronClass mails o
    - IMAP_USER
    - IMAP_PASS
    - STUD_NAME
-   - BOT_TOKEN
-   - DC_CHANNE
+   - DC_TOKEN
+   - DC_CHANNEL
+   - LINE_TOKEN
+   - LINE_GROUP
 5. Start the bot by command `npm run dev`
 6. Enjoy!
