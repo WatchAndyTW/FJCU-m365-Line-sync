@@ -14,14 +14,11 @@ export default class LineWebServer {
         });
         this.app.post("/*", mdw, (req, res) => {
             try {
-                console.log(req.body.events[0].source.groupId);
                 if(!existsSync("groups")) {
                     mkdirSync("groups");
                 }
-                writeFileSync(`./groups/${req.body.events[0].source.groupId}.json`, JSON.stringify(req.body.events[0].source, null, 4));
-            } catch (e) {
-                console.log(e);
-            }
+                writeFileSync(`./groups/${req.body.events[0].source.groupId}.json`, JSON.stringify(req.body.events[0], null, 4));
+            } catch { }
             res.sendStatus(200);
         });
         this.app.listen(ConfigUtil.getConfig().lineWebhook.port);
