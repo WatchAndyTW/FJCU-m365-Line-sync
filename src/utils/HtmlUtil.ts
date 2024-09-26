@@ -36,7 +36,7 @@ export default class HtmlUtil {
             if (list[i] != "") lastLine = i;
         }
         list = list.slice(0, lastLine);
-        return list.join("\n");
+        return list.join("\n").replace(/\n+$/, "");
     }
     
     private static isEmptyLine(line: string) {

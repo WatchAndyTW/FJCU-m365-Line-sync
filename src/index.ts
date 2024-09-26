@@ -3,6 +3,7 @@ import ImapClient from "./clients/imap/ImapClient.ts";
 import DiscordClient from "./clients/discord/DiscordClient.ts";
 import LineClient from "./clients/line/LineClient.ts";
 import ConfigUtil from "./utils/ConfigUtil.ts";
+import LineWebServer from "./clients/line/LineWebServer.ts";
 
 export let imap: ImapClient;
 export let discord: DiscordClient;
@@ -33,6 +34,10 @@ async function run() {
     LineClient.enabled = ConfigUtil.checkIfEmpty(config.line);
     if (LineClient.enabled) {
         line = new LineClient();
+        if (config.lineWebhook.enabled && config.lineWebhook.secret != "" && config.lineWebhook.port != 0) {
+            const lineWeb = new LineWebServer();
+            lineWeb.start();
+        }
     }
 
     if (!DiscordClient.enabled && !LineClient.enabled) {

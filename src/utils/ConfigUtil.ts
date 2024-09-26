@@ -13,6 +13,11 @@ const defaultConfig: ConfigContainer = {
     line: {
         token: "",
         group: "",
+    },
+    lineWebhook: {
+        enabled: false,
+        port: 5678,
+        secret: "",
     }
 }
 
@@ -55,6 +60,7 @@ interface ConfigContainer {
     imap: IMAP;
     discord: Discord;
     line: Line;
+    lineWebhook: LineWebhook;
 }
 
 interface IMAP {
@@ -71,4 +77,10 @@ interface Discord {
 interface Line {
     token: string;
     group: string;
+}
+
+interface LineWebhook {
+    enabled: boolean;
+    port: number,
+    secret: string;
 }
