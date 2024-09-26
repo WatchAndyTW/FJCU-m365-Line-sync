@@ -7,5 +7,6 @@ export default class LineClient {
         this.client = new line.messagingApi.MessagingApiClient({
             channelAccessToken: process.env.LINE_TOKEN as string,
         });
+        console.log("[LINE] Bot started");
     }
 }

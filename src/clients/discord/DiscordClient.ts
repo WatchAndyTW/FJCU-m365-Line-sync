@@ -20,7 +20,7 @@ export default class DiscordClient {
 
     public start(): void {
         this.registerListeners();
-        this.client.login(process.env.BOT_TOKEN as string);
+        this.client.login(process.env.DC_TOKEN as string);
     }
 
     private registerListeners(): void {
@@ -28,7 +28,7 @@ export default class DiscordClient {
     }
 
     public send(embed: EmbedBuilder): void {
-        let channel: Channel | undefined = this.client.channels.cache.get(process.env.DC_CHANNE as string);
+        let channel: Channel | undefined = this.client.channels.cache.get(process.env.DC_CHANNEL as string);
         if (channel == undefined) return;
         if (!channel.isTextBased()) return;
         let textChannel: TextChannel = channel as TextChannel;
