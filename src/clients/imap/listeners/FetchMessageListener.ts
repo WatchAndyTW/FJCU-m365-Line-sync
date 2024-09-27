@@ -17,7 +17,7 @@ export default function FetchMessage(msg: ImapMessage, seqNo: number) {
                     console.log(err);
                 }
             });
-            if (parsed.html as string != null) return;
+            if ((parsed.html as string) == null) return;
             if (ConfigUtil.checkIfIgnoreCourse(parsed.subject as string)) return;
             let trimmed: string = HtmlUtil.trimHtml(parsed.html as string);
             MsgUtil.send(parsed.subject as string, trimmed);
