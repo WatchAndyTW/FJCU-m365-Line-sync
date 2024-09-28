@@ -4,7 +4,7 @@ English | [中文](https://github.com/WatchAndyTW/TronClass-Social-sync/blob/mai
 A repository containing the source code of the bot for syncing TronClass mails onto social media platforms
 
 ## Usage
-1. Create a Discord bot on [Discord Developer Portal](https://discord.dev) and invite it into your server (or you can fix Line API and implement the listener stuff by yourself)
+1. Create a Discord bot on [Discord Developer Portal](https://discord.dev) or a LINE bot at LINE panel and enable Messaging API and invite it into your server
 2. In your school Email page (like Outlook), enable forwarding to a valid Gmail account (or whatever Email provider which supports IMAP)
 3. Create Application Password for your Google account (you can skip this step if you are using Email provider other than Gmail)
 4. Start the bot by command `npm run dev` for once and configure your config.json
