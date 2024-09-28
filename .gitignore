@@ -6,8 +6,8 @@ package-lock.json
 yarn.lock
 config.json
 *.sh
+groups.json
 
 # folders
 build
 node_modules
-groups

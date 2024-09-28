@@ -1,7 +1,8 @@
 import { middleware } from "@line/bot-sdk";
 import express from "express";
 import ConfigUtil from "../../utils/ConfigUtil.ts";
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { line } from "../../index.ts";
 
 export default class LineWebServer {
     public app = express();
@@ -12,13 +13,20 @@ export default class LineWebServer {
         const mdw = middleware({
             channelSecret: ConfigUtil.getConfig().lineWebhook.secret,
         });
-        this.app.post("/*", mdw, (req, res) => {
+        this.app.post("/*", mdw, async (req, res) => {
             try {
-                if(!existsSync("groups")) {
-                    mkdirSync("groups");
+                let groups: { [key: string]: any } = {};
+                if (existsSync("./groups.json")) {
+                    groups = JSON.parse(readFileSync("./groups.json", "utf8"));
                 }
-                writeFileSync(`./groups/${req.body.events[0].source.groupId}.json`, JSON.stringify(req.body.events[0], null, 4));
-            } catch { }
+                for (let event of req.body.events) {
+                    let group = await line.client.getGroupSummary((event as any).source.groupId);
+                    groups[(event as any).source.groupId] = group;
+                }
+                writeFileSync("./groups.json", JSON.stringify(groups, null, 4));
+            } catch (e) {
+                console.log(e);
+            }
             res.sendStatus(200);
         });
         this.app.listen(ConfigUtil.getConfig().lineWebhook.port);
