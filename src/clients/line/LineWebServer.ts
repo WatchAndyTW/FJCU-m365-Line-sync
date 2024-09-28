@@ -30,6 +30,6 @@ export default class LineWebServer {
             res.sendStatus(200);
         });
         this.app.listen(ConfigUtil.getConfig().lineWebhook.port);
-        console.log("[LINE] Webhook is listening at 5678");
+        console.log(`[LINE] Webhook is listening at ${ConfigUtil.getConfig().lineWebhook.port}`);
     }
 }

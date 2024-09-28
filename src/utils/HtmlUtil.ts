@@ -14,7 +14,7 @@ export default class HtmlUtil {
         let list = [];
         for (let line of body.split("\n")) {
             // School name line
-            if (!fjcuLine && line.trim() == "天主教輔仁大學") {
+            if (!fjcuLine && line.trim() == ConfigUtil.getConfig().imap.school_name) {
                 fjcuLine = true;
                 continue;
             }

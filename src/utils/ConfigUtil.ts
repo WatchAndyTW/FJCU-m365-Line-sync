@@ -5,6 +5,8 @@ const defaultConfig: ConfigContainer = {
     imap: {
         user: "",
         password: "",
+        from_mail: "",
+        school_name: "",
         student_name: "",
     },
     discord: {
@@ -77,6 +79,8 @@ interface ConfigContainer {
 interface IMAP {
     user: string;
     password: string;
+    from_mail: string,
+    school_name: string,
     student_name: string;
 }
 

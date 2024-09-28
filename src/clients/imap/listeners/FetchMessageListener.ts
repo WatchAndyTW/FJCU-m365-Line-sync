@@ -11,7 +11,7 @@ export default function FetchMessage(msg: ImapMessage, seqNo: number) {
         const mailStream = stream as unknown as Readable;
         simpleParser(mailStream, (err: any, parsed: ParsedMail) => {
             if (err) throw err;
-            if (parsed.from?.text != "elearn@mail.fju.edu.tw") return;
+            if (parsed.from?.text != ConfigUtil.getConfig().imap.from_mail) return;
             imap.client.addFlags(seqNo, "\\Seen", (err: any) => {
                 if (err) {
                     console.log(err);
